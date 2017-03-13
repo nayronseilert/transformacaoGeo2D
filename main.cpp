@@ -1,6 +1,6 @@
 /*
-  programa que faz operações de rotação, escala e translação
-  autor Náyron dos Anjos Seilert
+  programa que faz operaÃ§Ãµes de rotaÃ§Ã£o, escala e translaÃ§Ã£o
+  autor NÃ¡yron dos Anjos Seilert
 */
 
 #include <GL/glut.h>
@@ -19,6 +19,7 @@ void MenuPrincipal()
 {
     int op;
     system("cls");
+    cout<<endl<<endl;
     cout<<"\t\t|------------------------------------|"<<endl;
     cout<<"\t\t| UNIVERSIDADE FEDERAL DO TOCANTINS  |"<<endl;
     cout<<"\t\t|  FACULDADE CIENCIAS DA COMPUTACAO  |"<<endl;
@@ -66,8 +67,9 @@ void MenuPrincipal()
 
 }
 
-void MostrarEixoXY()//função que mostra os eixos x e y na tela opengl
+void MostrarEixoXY()//funÃ§Ã£o que mostra os eixos x e y na tela opengl
 {
+    glLineWidth(3);
     glColor3f (0.0, 0.0, 0.0);//cor das linhas
     glBegin(GL_LINES);
     glVertex2f (0.0, -100.0);
@@ -76,17 +78,9 @@ void MostrarEixoXY()//função que mostra os eixos x e y na tela opengl
     glVertex2f (100.0, 0.0);
     glEnd();
 }
-
-void display(void)
-{
-    // Limpar todos os pixels
-    glClear (GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity(); // Inicializa com matriz identidade
-
-    MostrarEixoXY();
+void TransformarGeom(){
 
     glColor3f (0.0, 0.0, 255.0);//cor do objeto
-
     glPushMatrix();
     glTranslatef(pos_X, pos_Y, 0.0);
     glRotatef(angulo, 0.0, 0.0, 1.0);
@@ -97,6 +91,17 @@ void display(void)
 
     glutWireIcosahedron();
     glPopMatrix();
+
+}
+
+void display(void)
+{
+    // Limpar todos os pixels
+    glClear (GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity(); // Inicializa com matriz identidade
+
+    MostrarEixoXY();
+    TransformarGeom();
 
     glutSwapBuffers ();
     glutPostRedisplay();
